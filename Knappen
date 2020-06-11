@@ -1,0 +1,36 @@
+// konstanter kommer inte att ändras, dvs ordinarie mätning t.ex temperatur. 
+// lägg till separata koder för endamål, när du slår ihop dem så bör knapptrycket
+// ändra vilken mätning som sker, "mätarepin" är funktion, "buttonpin" är knappen:
+const int buttonPin = 0;     // där knappen sitter, ändra 0
+const int (mätarePin) = 0;      // där mätaren sitter, ändra 0
+// variablarna ändras:
+int buttonState = 0;         // variabel för att läsa knapptryck, ändra 0
+void setup()
+{
+    Serial.begin(9600);
+    // initialiserar mätarePin som en output:
+    pinMode(mätarePin, OUTPUT);
+    // initialiserar knapptrycket:
+    pinMode(buttonPin, INPUT);
+}
+void loop()
+{
+    // läser värdet av knapptrycket:
+    buttonState = digitalRead(buttonPin);
+    // visar status av knapptrycket på seriemonitor
+    Serial.println(buttonState);
+    // kollar om knappen är intryckt.
+    // om den är intryckt så är det högt
+    if (buttonState == HIGH)
+    {
+        // växla mellan funktioner:
+        digitalWrite(ledPin, HIGH);
+    }
+    else
+    {
+        // ändrar mätare:
+        digitalWrite(mätarePin, LOW);
+    }
+    // tillagd elay
+    delay(100);
+}
